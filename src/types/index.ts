@@ -31,14 +31,16 @@ export interface Patient {
   condition: string;
   status: PatientStatus;
   admissionDate: string;
-  doctor: string | {
-    _id: string;
-    name: string;
-    specialization: string;
-    hospital: string;
-    phone?: string;
-    email?: string;
-  };
+  doctor:
+    | string
+    | {
+        _id: string;
+        name: string;
+        specialization: string;
+        hospital: string;
+        phone?: string;
+        email?: string;
+      };
   notes?: string;
   createdAt: string;
   updatedAt?: string;

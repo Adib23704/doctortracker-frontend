@@ -1,16 +1,16 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import { TrendingUp } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import {
-  AreaChart,
   Area,
+  AreaChart,
+  CartesianGrid,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
 } from 'recharts';
-import { TrendingUp } from 'lucide-react';
 
 interface AdmissionsChartProps {
   data: Array<{ date: string; admissions: number }>;
@@ -75,12 +75,15 @@ export const AdmissionsChart = ({ data }: AdmissionsChartProps) => {
             />
             <Tooltip
               content={({ active, payload, label }) => {
-                if (active && payload && payload.length) {
+                if (active && payload?.length) {
                   return (
                     <div className="rounded-xl border border-slate-200 bg-white p-3 shadow-md">
-                      <p className="text-xs font-semibold text-slate-800">{formatMonth(String(label))}</p>
+                      <p className="text-xs font-semibold text-slate-800">
+                        {formatMonth(String(label))}
+                      </p>
                       <p className="mt-1 text-xs text-teal-700 font-bold">
-                        {payload[0].value} {payload[0].value === 1 ? 'Patient' : 'Patients'} Admitted
+                        {payload[0].value} {payload[0].value === 1 ? 'Patient' : 'Patients'}{' '}
+                        Admitted
                       </p>
                     </div>
                   );

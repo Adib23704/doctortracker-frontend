@@ -1,17 +1,17 @@
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'next/navigation';
-import { DashboardLayout } from '../../../components/layout/DashboardLayout';
-import { DoctorProfileHeader } from '../../../components/doctors/DoctorProfileHeader';
-import { DoctorPatientList } from '../../../components/doctors/DoctorPatientList';
-import { AddPatientUnderDoctorModal } from '../../../components/doctors/AddPatientUnderDoctorModal';
-import { ConfirmDialog } from '../../../components/common/ConfirmDialog';
-import { SearchBar } from '../../../components/common/SearchBar';
-import { Pagination } from '../../../components/common/Pagination';
-import { Doctor, Patient, PaginationInfo } from '../../../types';
-import { api } from '../../../lib/api';
+import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'sonner';
+import { ConfirmDialog } from '../../../components/common/ConfirmDialog';
+import { Pagination } from '../../../components/common/Pagination';
+import { SearchBar } from '../../../components/common/SearchBar';
+import { AddPatientUnderDoctorModal } from '../../../components/doctors/AddPatientUnderDoctorModal';
+import { DoctorPatientList } from '../../../components/doctors/DoctorPatientList';
+import { DoctorProfileHeader } from '../../../components/doctors/DoctorProfileHeader';
+import { DashboardLayout } from '../../../components/layout/DashboardLayout';
+import { api } from '../../../lib/api';
+import type { Doctor, PaginationInfo, Patient } from '../../../types';
 
 export default function DoctorDetailPage() {
   const params = useParams();
@@ -115,10 +115,7 @@ export default function DoctorDetailPage() {
       subtitle={`${doctor.specialization} &bull; ${doctor.hospital}`}
     >
       <div className="space-y-6">
-        <DoctorProfileHeader
-          doctor={doctor}
-          onAddPatient={() => setIsAddPatientModalOpen(true)}
-        />
+        <DoctorProfileHeader doctor={doctor} onAddPatient={() => setIsAddPatientModalOpen(true)} />
 
         <div className="space-y-4">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -150,7 +147,9 @@ export default function DoctorDetailPage() {
           <Pagination
             pagination={pagination}
             onPageChange={(newPage) => setPagination((prev) => ({ ...prev, page: newPage }))}
-            onLimitChange={(newLimit) => setPagination((prev) => ({ ...prev, limit: newLimit, page: 1 }))}
+            onLimitChange={(newLimit) =>
+              setPagination((prev) => ({ ...prev, limit: newLimit, page: 1 }))
+            }
           />
         </div>
       </div>

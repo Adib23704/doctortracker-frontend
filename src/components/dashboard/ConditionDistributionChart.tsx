@@ -1,14 +1,8 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import {
-  PieChart,
-  Pie,
-  Cell,
-  Tooltip,
-  ResponsiveContainer,
-} from 'recharts';
 import { HeartPulse } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 
 interface ConditionDistributionChartProps {
   data: Array<{
@@ -28,11 +22,13 @@ export const ConditionDistributionChart = ({ data }: ConditionDistributionChartP
   }, []);
 
   if (!mounted) {
-    return <div className="h-72 w-full animate-pulse rounded-2xl bg-slate-50" />;
+    return <div className="h-full min-h-[380px] w-full animate-pulse rounded-2xl bg-slate-50" />;
   }
 
+  const totalCases = data.reduce((sum, item) => sum + item.count, 0);
+
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-2xs">
+    <div className="flex h-full flex-col justify-between rounded-2xl border border-slate-200 bg-white p-6 shadow-2xs">
       <div className="flex items-center justify-between border-b border-slate-100 pb-4">
         <div>
           <h3 className="text-sm font-semibold text-slate-900">Clinical Conditions Breakdown</h3>
@@ -44,64 +40,80 @@ export const ConditionDistributionChart = ({ data }: ConditionDistributionChartP
         </div>
       </div>
 
-      <div className="mt-4 flex flex-col items-center sm:flex-row sm:items-center sm:justify-between">
-        <div className="h-56 w-56">
-          <ResponsiveContainer width="100%" height="100%">
-            <PieChart>
-              <Tooltip
-                content={({ active, payload }) => {
-                  if (active && payload && payload.length) {
-                    const item = payload[0].payload;
-                    return (
-                      <div className="rounded-xl border border-slate-200 bg-white p-2.5 shadow-md">
-                        <p className="text-xs font-semibold text-slate-900">{item.condition}</p>
-                        <p className="text-xs font-bold text-teal-700">
-                          {item.count} cases ({item.percentage}%)
-                        </p>
-                      </div>
-                    );
-                  }
-                  return null;
-                }}
-              />
-              <Pie
-                data={data}
-                dataKey="count"
-                nameKey="condition"
-                cx="50%"
-                cy="50%"
-                innerRadius={52}
-                outerRadius={80}
-                paddingAngle={3}
-              >
-                {data.map((_, index) => (
-                  <Cell key={`cell-${index}`} fill={PALETTE[index % PALETTE.length]} />
-                ))}
-              </Pie>
-            </PieChart>
-          </ResponsiveContainer>
+      {data.length === 0 ? (
+        <div className="flex flex-1 flex-col items-center justify-center text-center text-xs text-slate-400">
+          <p>No diagnosis records recorded yet.</p>
         </div>
-
-        <div className="mt-4 flex-1 space-y-2 sm:mt-0 sm:pl-6">
-          {data.map((item, index) => (
-            <div key={item.condition} className="flex items-center justify-between text-xs">
-              <div className="flex items-center gap-2">
-                <span
-                  className="h-2.5 w-2.5 shrink-0 rounded-full"
-                  style={{ backgroundColor: PALETTE[index % PALETTE.length] }}
+      ) : (
+        <div className="mt-4 flex flex-1 flex-col justify-between">
+          <div className="relative mx-auto h-44 w-44">
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Tooltip
+                  content={({ active, payload }) => {
+                    if (active && payload?.length) {
+                      const item = payload[0].payload;
+                      return (
+                        <div className="rounded-xl border border-slate-200 bg-white p-2.5 shadow-md">
+                          <p className="text-xs font-semibold text-slate-900">{item.condition}</p>
+                          <p className="text-xs font-bold text-teal-700">
+                            {item.count} cases ({item.percentage}%)
+                          </p>
+                        </div>
+                      );
+                    }
+                    return null;
+                  }}
                 />
-                <span className="font-medium text-slate-700 truncate max-w-[140px]">
-                  {item.condition}
-                </span>
-              </div>
-              <div className="flex items-center gap-2 text-slate-500 font-mono text-[11px]">
-                <span>{item.count}</span>
-                <span className="text-slate-400">({item.percentage}%)</span>
-              </div>
+                <Pie
+                  data={data}
+                  dataKey="count"
+                  nameKey="condition"
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={46}
+                  outerRadius={68}
+                  paddingAngle={3}
+                >
+                  {data.map((_, index) => (
+                    <Cell key={`cell-${index}`} fill={PALETTE[index % PALETTE.length]} />
+                  ))}
+                </Pie>
+              </PieChart>
+            </ResponsiveContainer>
+
+            <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
+              <span className="text-xl font-bold tracking-tight text-slate-800">{totalCases}</span>
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
+                Cases
+              </span>
             </div>
-          ))}
+          </div>
+
+          <div className="mt-4 divide-y divide-slate-100 border-t border-slate-100 pt-2">
+            {data.map((item, index) => (
+              <div
+                key={item.condition}
+                className="flex items-center justify-between py-1.5 text-xs"
+              >
+                <div className="flex items-center gap-2 min-w-0 pr-2">
+                  <span
+                    className="h-2.5 w-2.5 shrink-0 rounded-full"
+                    style={{ backgroundColor: PALETTE[index % PALETTE.length] }}
+                  />
+                  <span className="font-medium text-slate-700 truncate" title={item.condition}>
+                    {item.condition}
+                  </span>
+                </div>
+                <div className="flex shrink-0 items-center gap-2 font-mono text-[11px] text-slate-500">
+                  <span className="font-semibold text-slate-800">{item.count}</span>
+                  <span className="text-slate-400">({item.percentage}%)</span>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

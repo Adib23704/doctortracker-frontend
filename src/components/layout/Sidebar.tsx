@@ -1,9 +1,8 @@
 'use client';
 
-import React from 'react';
+import { LayoutDashboard, LogOut, Stethoscope, Users } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, Users, UserPlus, LogOut, Stethoscope } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { cn } from '../../lib/utils';
 
@@ -57,8 +56,12 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
             <Stethoscope className="h-5 w-5" />
           </div>
           <div>
-            <span className="block text-sm font-semibold tracking-tight text-slate-900">Doctor Tracker</span>
-            <span className="block text-[11px] font-medium text-teal-700">Care Guide BD Portal</span>
+            <span className="block text-sm font-semibold tracking-tight text-slate-900">
+              Doctor Tracker
+            </span>
+            <span className="block text-[11px] font-medium text-teal-700">
+              Care Guide BD Portal
+            </span>
           </div>
         </div>
 
@@ -97,8 +100,12 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
         <div className="border-t border-slate-100 p-3">
           <div className="flex items-center justify-between rounded-lg bg-slate-50 p-2.5">
             <div className="min-w-0 pr-2">
-              <p className="truncate text-xs font-semibold text-slate-800">{user?.name || 'Administrator'}</p>
-              <p className="truncate text-[11px] text-slate-500">{user?.email || 'admin@doctortracker.com'}</p>
+              <p className="truncate text-xs font-semibold text-slate-800">
+                {user?.name || 'Administrator'}
+              </p>
+              <p className="truncate text-[11px] text-slate-500">
+                {user?.email || 'admin@doctortracker.com'}
+              </p>
             </div>
             <button
               onClick={logout}

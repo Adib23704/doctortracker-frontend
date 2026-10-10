@@ -1,10 +1,9 @@
 'use client';
 
-import React from 'react';
-import Link from 'next/link';
-import { Patient } from '../../types';
-import { formatDate } from '../../lib/utils';
 import { ArrowUpRight, Stethoscope } from 'lucide-react';
+import Link from 'next/link';
+import { formatDate } from '../../lib/utils';
+import type { Patient } from '../../types';
 
 interface RecentAdmissionsTableProps {
   patients: Patient[];
@@ -14,9 +13,9 @@ interface RecentAdmissionsTableProps {
 export const RecentAdmissionsTable = ({ patients, isLoading }: RecentAdmissionsTableProps) => {
   if (isLoading) {
     return (
-      <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white p-5">
+      <div className="flex h-full min-h-[380px] flex-col justify-between overflow-hidden rounded-2xl border border-slate-200 bg-white p-5">
         <div className="space-y-3">
-          {[...Array(5)].map((_, i) => (
+          {[...Array(6)].map((_, i) => (
             <div key={i} className="h-10 w-full animate-pulse rounded-lg bg-slate-100" />
           ))}
         </div>
@@ -38,7 +37,7 @@ export const RecentAdmissionsTable = ({ patients, isLoading }: RecentAdmissionsT
   };
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xs">
+    <div className="flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xs">
       <div className="flex items-center justify-between border-b border-slate-100 px-6 py-4">
         <div>
           <h3 className="text-sm font-semibold text-slate-900">Recent Patient Admissions</h3>
@@ -53,7 +52,7 @@ export const RecentAdmissionsTable = ({ patients, isLoading }: RecentAdmissionsT
         </Link>
       </div>
 
-      <div className="overflow-x-auto">
+      <div className="flex-1 overflow-x-auto">
         <table className="w-full text-left text-xs">
           <thead className="border-b border-slate-100 bg-slate-50/70 text-[11px] font-semibold tracking-wider text-slate-500 uppercase">
             <tr>
@@ -65,7 +64,7 @@ export const RecentAdmissionsTable = ({ patients, isLoading }: RecentAdmissionsT
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100 text-slate-700">
-            {patients.slice(0, 5).map((p) => {
+            {patients.slice(0, 8).map((p) => {
               const doctorObj = typeof p.doctor === 'object' && p.doctor !== null ? p.doctor : null;
               return (
                 <tr key={p._id} className="transition-colors hover:bg-slate-50/80">
@@ -94,7 +93,7 @@ export const RecentAdmissionsTable = ({ patients, isLoading }: RecentAdmissionsT
                         <span>{doctorObj.name}</span>
                       </Link>
                     ) : (
-                      <span className="text-slate-400">—</span>
+                      <span className="text-slate-400">-</span>
                     )}
                   </td>
                   <td className="py-3 pl-3 pr-6 text-right text-slate-500 whitespace-nowrap">

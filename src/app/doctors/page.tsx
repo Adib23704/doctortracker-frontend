@@ -1,16 +1,16 @@
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
-import { DashboardLayout } from '../../components/layout/DashboardLayout';
-import { DoctorTable } from '../../components/doctors/DoctorTable';
-import { AddDoctorModal } from '../../components/doctors/AddDoctorModal';
-import { ConfirmDialog } from '../../components/common/ConfirmDialog';
-import { SearchBar } from '../../components/common/SearchBar';
-import { Pagination } from '../../components/common/Pagination';
-import { Doctor, PaginationInfo } from '../../types';
-import { api } from '../../lib/api';
-import { UserPlus, Filter, RotateCcw, Calendar } from 'lucide-react';
+import { Calendar, Filter, RotateCcw, UserPlus } from 'lucide-react';
+import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'sonner';
+import { ConfirmDialog } from '../../components/common/ConfirmDialog';
+import { Pagination } from '../../components/common/Pagination';
+import { SearchBar } from '../../components/common/SearchBar';
+import { AddDoctorModal } from '../../components/doctors/AddDoctorModal';
+import { DoctorTable } from '../../components/doctors/DoctorTable';
+import { DashboardLayout } from '../../components/layout/DashboardLayout';
+import { api } from '../../lib/api';
+import type { Doctor, PaginationInfo } from '../../types';
 
 const SPECIALTIES = [
   'All',

@@ -1,10 +1,9 @@
 'use client';
 
-import React from 'react';
+import { ArrowUpRight, Calendar, Edit, HeartPulse, Phone, Stethoscope, Trash2 } from 'lucide-react';
 import Link from 'next/link';
-import { Patient } from '../../types';
 import { formatDate } from '../../lib/utils';
-import { HeartPulse, Phone, Edit, Trash2, Calendar, Stethoscope, ArrowUpRight } from 'lucide-react';
+import type { Patient } from '../../types';
 
 interface PatientTableProps {
   patients: Patient[];
@@ -39,7 +38,8 @@ export const PatientTable = ({
         </div>
         <h3 className="mt-3 text-sm font-semibold text-slate-800">No patients found</h3>
         <p className="mt-1 max-w-sm text-xs text-slate-500">
-          No clinical patient records match your current search or filter parameters. Try clearing filters.
+          No clinical patient records match your current search or filter parameters. Try clearing
+          filters.
         </p>
       </div>
     );
@@ -91,7 +91,9 @@ export const PatientTable = ({
                   </td>
 
                   <td className="px-3 py-3.5 text-slate-600 whitespace-nowrap">
-                    <span>{p.age} yrs &bull; {p.gender}</span>
+                    <span>
+                      {p.age} yrs &bull; {p.gender}
+                    </span>
                   </td>
 
                   <td className="px-3 py-3.5 whitespace-nowrap font-medium text-slate-800">
@@ -121,7 +123,7 @@ export const PatientTable = ({
                         <ArrowUpRight className="h-3 w-3 opacity-0 transition group-hover:opacity-100" />
                       </Link>
                     ) : (
-                      <span className="text-slate-400">—</span>
+                      <span className="text-slate-400">-</span>
                     )}
                   </td>
 

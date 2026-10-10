@@ -1,4 +1,4 @@
-# Doctor Tracker — Frontend Web Application
+# Doctor Tracker - Frontend Web Application
 
 Frontend client for Doctor Tracker, built with Next.js 15 (App Router), React 19, TypeScript, and Tailwind CSS. Designed as a clean administrative portal for clinic coordinators to manage doctors, track patients, and view real-time statistics.
 
@@ -68,11 +68,19 @@ npm run build
 npm start
 ```
 
+#### 7. Linting & formatting (Biome)
+Validate and format code using Biome:
+```bash
+npm run lint         # Verify code against Biome lint & style rules
+npm run lint:fix     # Apply auto-fixes and organize imports
+npm run format       # Format codebase
+```
+
 ---
 
 ## System Architecture
 
-The frontend is built using Next.js 15 App Router with clean separation between pages, UI components, API services, and session state:
+The frontend is built using Next.js 16 App Router with clean separation between pages, UI components, API services, and session state:
 
 ```
 frontend/src/

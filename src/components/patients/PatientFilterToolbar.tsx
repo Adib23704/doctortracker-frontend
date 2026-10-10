@@ -1,9 +1,8 @@
 'use client';
 
-import React from 'react';
+import { Calendar, Filter, RotateCcw } from 'lucide-react';
+import type { Doctor } from '../../types';
 import { SearchBar } from '../common/SearchBar';
-import { Doctor } from '../../types';
-import { Filter, Calendar, RotateCcw, HeartPulse } from 'lucide-react';
 
 interface PatientFilterToolbarProps {
   search: string;
@@ -36,13 +35,7 @@ const COMMON_CONDITIONS = [
   'Atopic Dermatitis',
 ];
 
-const STATUS_OPTIONS = [
-  'All',
-  'Active',
-  'Under Observation',
-  'Critical',
-  'Discharged',
-];
+const STATUS_OPTIONS = ['All', 'Active', 'Under Observation', 'Critical', 'Discharged'];
 
 export const PatientFilterToolbar = ({
   search,

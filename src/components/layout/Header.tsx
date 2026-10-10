@@ -1,7 +1,6 @@
 'use client';
 
-import React from 'react';
-import { Menu, Calendar, ShieldCheck } from 'lucide-react';
+import { Calendar, Menu, ShieldCheck } from 'lucide-react';
 
 interface HeaderProps {
   onToggleSidebar: () => void;
@@ -29,7 +28,9 @@ export const Header = ({ onToggleSidebar, title, subtitle }: HeaderProps) => {
         </button>
 
         <div>
-          {title && <h1 className="text-base font-semibold text-slate-900 leading-tight">{title}</h1>}
+          {title && (
+            <h1 className="text-base font-semibold text-slate-900 leading-tight">{title}</h1>
+          )}
           {subtitle && <p className="text-xs text-slate-500">{subtitle}</p>}
         </div>
       </div>

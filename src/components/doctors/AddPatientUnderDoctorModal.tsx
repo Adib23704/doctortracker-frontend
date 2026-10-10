@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
-import { X, UserPlus, HeartPulse, Phone, Mail, User, Calendar, FileText } from 'lucide-react';
-import { api } from '../../lib/api';
+import { Calendar, HeartPulse, Mail, Phone, User, UserPlus, X } from 'lucide-react';
+import type React from 'react';
+import { useState } from 'react';
 import { toast } from 'sonner';
+import { api } from '../../lib/api';
 
 interface AddPatientUnderDoctorModalProps {
   doctorId: string;
@@ -64,7 +65,10 @@ export const AddPatientUnderDoctorModal = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs transition-opacity" onClick={onClose} />
+      <div
+        className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs transition-opacity"
+        onClick={onClose}
+      />
 
       <div className="relative w-full max-w-lg rounded-2xl border border-slate-200 bg-white p-6 shadow-xl sm:p-7 max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between border-b border-slate-100 pb-4">
@@ -77,7 +81,11 @@ export const AddPatientUnderDoctorModal = ({
               <p className="text-xs text-slate-500">Assigning directly under {doctorName}</p>
             </div>
           </div>
-          <button onClick={onClose} className="text-slate-400 hover:text-slate-600" aria-label="Close modal">
+          <button
+            onClick={onClose}
+            className="text-slate-400 hover:text-slate-600"
+            aria-label="Close modal"
+          >
             <X className="h-5 w-5" />
           </button>
         </div>
@@ -90,7 +98,9 @@ export const AddPatientUnderDoctorModal = ({
 
         <form onSubmit={handleSubmit} className="mt-5 space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-700">Patient Full Name *</label>
+            <label className="block text-xs font-semibold text-slate-700">
+              Patient Full Name *
+            </label>
             <div className="relative mt-1">
               <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                 <User className="h-4 w-4 text-slate-400" />
@@ -154,7 +164,9 @@ export const AddPatientUnderDoctorModal = ({
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700">Email Address (Optional)</label>
+              <label className="block text-xs font-semibold text-slate-700">
+                Email Address (Optional)
+              </label>
               <div className="relative mt-1">
                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                   <Mail className="h-4 w-4 text-slate-400" />
@@ -172,7 +184,9 @@ export const AddPatientUnderDoctorModal = ({
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
-              <label className="block text-xs font-semibold text-slate-700">Medical Condition / Diagnosis *</label>
+              <label className="block text-xs font-semibold text-slate-700">
+                Medical Condition / Diagnosis *
+              </label>
               <div className="relative mt-1">
                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                   <HeartPulse className="h-4 w-4 text-slate-400" />
@@ -189,7 +203,9 @@ export const AddPatientUnderDoctorModal = ({
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700">Clinical Status *</label>
+              <label className="block text-xs font-semibold text-slate-700">
+                Clinical Status *
+              </label>
               <select
                 value={formData.status}
                 onChange={(e) => setFormData({ ...formData, status: e.target.value })}
@@ -204,7 +220,9 @@ export const AddPatientUnderDoctorModal = ({
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700">Admission / Visit Date *</label>
+            <label className="block text-xs font-semibold text-slate-700">
+              Admission / Visit Date *
+            </label>
             <div className="relative mt-1">
               <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                 <Calendar className="h-4 w-4 text-slate-400" />
@@ -220,7 +238,9 @@ export const AddPatientUnderDoctorModal = ({
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700">Clinical Notes (Optional)</label>
+            <label className="block text-xs font-semibold text-slate-700">
+              Clinical Notes (Optional)
+            </label>
             <div className="relative mt-1">
               <textarea
                 rows={2}
@@ -246,7 +266,9 @@ export const AddPatientUnderDoctorModal = ({
               disabled={isLoading}
               className="flex items-center gap-2 rounded-lg bg-teal-600 px-4 py-2 text-xs font-semibold text-white shadow-2xs transition hover:bg-teal-700 disabled:opacity-60"
             >
-              {isLoading && <div className="h-3 w-3 animate-spin rounded-full border-2 border-white border-t-transparent" />}
+              {isLoading && (
+                <div className="h-3 w-3 animate-spin rounded-full border-2 border-white border-t-transparent" />
+              )}
               <span>Add Patient</span>
             </button>
           </div>

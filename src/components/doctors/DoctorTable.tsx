@@ -1,10 +1,9 @@
 'use client';
 
-import React from 'react';
+import { ArrowUpRight, Building2, Mail, Phone, Stethoscope, Trash2, Users } from 'lucide-react';
 import Link from 'next/link';
-import { Doctor } from '../../types';
 import { formatDate } from '../../lib/utils';
-import { Stethoscope, Building2, Phone, Mail, Users, ArrowUpRight, Trash2 } from 'lucide-react';
+import type { Doctor } from '../../types';
 
 interface DoctorTableProps {
   doctors: Doctor[];
@@ -33,7 +32,8 @@ export const DoctorTable = ({ doctors, isLoading, onDeleteDoctor }: DoctorTableP
         </div>
         <h3 className="mt-3 text-sm font-semibold text-slate-800">No doctors found</h3>
         <p className="mt-1 max-w-sm text-xs text-slate-500">
-          No medical practitioner records match your current search or filter criteria. Try adjusting filters or create a new doctor.
+          No medical practitioner records match your current search or filter criteria. Try
+          adjusting filters or create a new doctor.
         </p>
       </div>
     );

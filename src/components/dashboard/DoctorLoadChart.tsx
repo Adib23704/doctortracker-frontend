@@ -1,16 +1,8 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from 'recharts';
 import { Users } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
 interface DoctorLoadChartProps {
   data: Array<{
@@ -72,14 +64,17 @@ export const DoctorLoadChart = ({ data }: DoctorLoadChartProps) => {
             />
             <Tooltip
               content={({ active, payload }) => {
-                if (active && payload && payload.length) {
+                if (active && payload?.length) {
                   const item = payload[0].payload;
                   return (
                     <div className="rounded-xl border border-slate-200 bg-white p-3 shadow-md">
                       <p className="text-xs font-semibold text-slate-900">{item.doctorName}</p>
-                      <p className="text-[11px] text-slate-500">{item.specialization} &bull; {item.hospital}</p>
+                      <p className="text-[11px] text-slate-500">
+                        {item.specialization} &bull; {item.hospital}
+                      </p>
                       <p className="mt-1.5 text-xs font-bold text-teal-700">
-                        {item.patientCount} Assigned {item.patientCount === 1 ? 'Patient' : 'Patients'}
+                        {item.patientCount} Assigned{' '}
+                        {item.patientCount === 1 ? 'Patient' : 'Patients'}
                       </p>
                     </div>
                   );

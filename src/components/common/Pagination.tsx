@@ -1,8 +1,7 @@
 'use client';
 
-import React from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { PaginationInfo } from '../../types';
+import type { PaginationInfo } from '../../types';
 
 interface PaginationProps {
   pagination: PaginationInfo;

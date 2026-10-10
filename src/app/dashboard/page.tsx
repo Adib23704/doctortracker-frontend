@@ -1,15 +1,15 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { DashboardLayout } from '../../components/layout/DashboardLayout';
-import { StatCards } from '../../components/dashboard/StatCards';
-import { AdmissionsChart } from '../../components/dashboard/AdmissionsChart';
-import { DoctorLoadChart } from '../../components/dashboard/DoctorLoadChart';
-import { ConditionDistributionChart } from '../../components/dashboard/ConditionDistributionChart';
-import { RecentAdmissionsTable } from '../../components/dashboard/RecentAdmissionsTable';
-import { DashboardAnalytics, Patient } from '../../types';
-import { api } from '../../lib/api';
+import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
+import { AdmissionsChart } from '../../components/dashboard/AdmissionsChart';
+import { ConditionDistributionChart } from '../../components/dashboard/ConditionDistributionChart';
+import { DoctorLoadChart } from '../../components/dashboard/DoctorLoadChart';
+import { RecentAdmissionsTable } from '../../components/dashboard/RecentAdmissionsTable';
+import { StatCards } from '../../components/dashboard/StatCards';
+import { DashboardLayout } from '../../components/layout/DashboardLayout';
+import { api } from '../../lib/api';
+import type { DashboardAnalytics, Patient } from '../../types';
 
 export default function DashboardPage() {
   const [analytics, setAnalytics] = useState<DashboardAnalytics | null>(null);
@@ -22,7 +22,7 @@ export default function DashboardPage() {
       try {
         const [analyticsRes, patientsRes] = await Promise.all([
           api.getDashboardAnalytics(),
-          api.getPatients({ limit: 5 }),
+          api.getPatients({ limit: 8 }),
         ]);
 
         setAnalytics(analyticsRes.data);
@@ -59,12 +59,12 @@ export default function DashboardPage() {
           <DoctorLoadChart data={analytics?.patientsPerDoctor || []} />
         </div>
 
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-          <div className="lg:col-span-1">
+        <div className="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-3">
+          <div className="h-full lg:col-span-1">
             <ConditionDistributionChart data={analytics?.conditionBreakdown || []} />
           </div>
 
-          <div className="lg:col-span-2">
+          <div className="h-full lg:col-span-2">
             <RecentAdmissionsTable patients={recentPatients} isLoading={isLoading} />
           </div>
         </div>

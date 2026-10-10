@@ -1,8 +1,7 @@
 'use client';
 
-import React from 'react';
-import { Stethoscope, Users, Activity, AlertCircle, Scale } from 'lucide-react';
-import { DashboardAnalytics } from '../../types';
+import { Activity, AlertCircle, Scale, Stethoscope, Users } from 'lucide-react';
+import type { DashboardAnalytics } from '../../types';
 
 interface StatCardsProps {
   kpis: DashboardAnalytics['kpis'];
@@ -14,7 +13,10 @@ export const StatCards = ({ kpis, isLoading }: StatCardsProps) => {
     return (
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
         {[...Array(5)].map((_, i) => (
-          <div key={i} className="h-28 animate-pulse rounded-2xl border border-slate-200 bg-white p-5" />
+          <div
+            key={i}
+            className="h-28 animate-pulse rounded-2xl border border-slate-200 bg-white p-5"
+          />
         ))}
       </div>
     );
@@ -74,7 +76,9 @@ export const StatCards = ({ kpis, isLoading }: StatCardsProps) => {
           >
             <div className="flex items-center justify-between">
               <span className="text-xs font-semibold text-slate-500">{card.title}</span>
-              <div className={`flex h-9 w-9 items-center justify-center rounded-xl ${card.iconBg} ${card.iconColor}`}>
+              <div
+                className={`flex h-9 w-9 items-center justify-center rounded-xl ${card.iconBg} ${card.iconColor}`}
+              >
                 <Icon className="h-4.5 w-4.5" />
               </div>
             </div>

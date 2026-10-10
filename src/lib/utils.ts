@@ -1,4 +1,4 @@
-import { clsx, type ClassValue } from 'clsx';
+import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs: ClassValue[]) {
@@ -8,7 +8,7 @@ export function cn(...inputs: ClassValue[]) {
 export function formatDate(dateString: string | Date | undefined): string {
   if (!dateString) return '-';
   const d = new Date(dateString);
-  if (isNaN(d.getTime())) return '-';
+  if (Number.isNaN(d.getTime())) return '-';
   return d.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'short',
@@ -19,7 +19,7 @@ export function formatDate(dateString: string | Date | undefined): string {
 export function formatDateTime(dateString: string | Date | undefined): string {
   if (!dateString) return '-';
   const d = new Date(dateString);
-  if (isNaN(d.getTime())) return '-';
+  if (Number.isNaN(d.getTime())) return '-';
   return d.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'short',

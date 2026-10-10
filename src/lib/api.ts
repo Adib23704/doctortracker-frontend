@@ -1,4 +1,4 @@
-import { ApiResponse, DashboardAnalytics, Doctor, Patient } from '../types';
+import type { ApiResponse, DashboardAnalytics, Doctor, Patient } from '../types';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
 
@@ -11,7 +11,7 @@ class ApiClient {
     if (typeof window !== 'undefined') {
       const token = localStorage.getItem('token');
       if (token) {
-        headers['Authorization'] = `Bearer ${token}`;
+        headers.Authorization = `Bearer ${token}`;
       }
     }
 
@@ -44,7 +44,8 @@ class ApiClient {
           }
         }
 
-        const errorMessage = data?.error?.message || `Request failed with status ${response.status}`;
+        const errorMessage =
+          data?.error?.message || `Request failed with status ${response.status}`;
         throw new Error(errorMessage);
       }
 
@@ -96,7 +97,10 @@ class ApiClient {
     });
   }
 
-  async getDoctorPatients(doctorId: string, params: Record<string, string | number | undefined> = {}) {
+  async getDoctorPatients(
+    doctorId: string,
+    params: Record<string, string | number | undefined> = {}
+  ) {
     const searchParams = new URLSearchParams();
     Object.entries(params).forEach(([key, val]) => {
       if (val !== undefined && val !== '') {

@@ -1,9 +1,8 @@
 'use client';
 
-import React from 'react';
-import { Patient } from '../../types';
+import { Calendar, HeartPulse, Phone, Trash2 } from 'lucide-react';
 import { formatDate } from '../../lib/utils';
-import { HeartPulse, Phone, Trash2, Calendar, User, FileText } from 'lucide-react';
+import type { Patient } from '../../types';
 
 interface DoctorPatientListProps {
   patients: Patient[];
@@ -34,9 +33,12 @@ export const DoctorPatientList = ({
         <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-teal-50 text-teal-600">
           <HeartPulse className="h-5 w-5" />
         </div>
-        <h4 className="mt-3 text-sm font-semibold text-slate-800">No patients under this doctor yet</h4>
+        <h4 className="mt-3 text-sm font-semibold text-slate-800">
+          No patients under this doctor yet
+        </h4>
         <p className="mt-1 max-w-xs text-xs text-slate-500">
-          This doctor currently has 0 registered patients. Click &quot;Add Patient Under Doctor&quot; to assign a new patient.
+          This doctor currently has 0 registered patients. Click &quot;Add Patient Under
+          Doctor&quot; to assign a new patient.
         </p>
       </div>
     );
@@ -85,7 +87,9 @@ export const DoctorPatientList = ({
                 </td>
 
                 <td className="px-3 py-3.5 text-slate-600 whitespace-nowrap">
-                  <span>{p.age} yrs &bull; {p.gender}</span>
+                  <span>
+                    {p.age} yrs &bull; {p.gender}
+                  </span>
                 </td>
 
                 <td className="px-3 py-3.5 font-medium text-slate-800 whitespace-nowrap">

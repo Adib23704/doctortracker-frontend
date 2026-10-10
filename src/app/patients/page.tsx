@@ -1,15 +1,15 @@
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
-import { DashboardLayout } from '../../components/layout/DashboardLayout';
-import { PatientFilterToolbar } from '../../components/patients/PatientFilterToolbar';
-import { PatientTable } from '../../components/patients/PatientTable';
-import { EditPatientModal } from '../../components/patients/EditPatientModal';
+import { useCallback, useEffect, useState } from 'react';
+import { toast } from 'sonner';
 import { ConfirmDialog } from '../../components/common/ConfirmDialog';
 import { Pagination } from '../../components/common/Pagination';
-import { Patient, Doctor, PaginationInfo } from '../../types';
+import { DashboardLayout } from '../../components/layout/DashboardLayout';
+import { EditPatientModal } from '../../components/patients/EditPatientModal';
+import { PatientFilterToolbar } from '../../components/patients/PatientFilterToolbar';
+import { PatientTable } from '../../components/patients/PatientTable';
 import { api } from '../../lib/api';
-import { toast } from 'sonner';
+import type { Doctor, PaginationInfo, Patient } from '../../types';
 
 export default function PatientsPage() {
   const [patients, setPatients] = useState<Patient[]>([]);
@@ -37,7 +37,8 @@ export default function PatientsPage() {
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    api.getDoctors({ limit: 100 })
+    api
+      .getDoctors({ limit: 100 })
       .then((res) => setDoctors(res.data))
       .catch(() => {});
   }, []);

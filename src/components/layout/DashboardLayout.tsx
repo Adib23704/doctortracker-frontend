@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Sidebar } from './Sidebar';
-import { Header } from './Header';
+import type React from 'react';
+import { useState } from 'react';
 import { ProtectedRoute } from '../auth/ProtectedRoute';
+import { Header } from './Header';
+import { Sidebar } from './Sidebar';
 
 interface DashboardLayoutProps {
   children: React.ReactNode;

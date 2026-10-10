@@ -1,10 +1,9 @@
 'use client';
 
-import React from 'react';
+import { ArrowLeft, Building2, Calendar, Mail, Phone, Stethoscope, Users } from 'lucide-react';
 import Link from 'next/link';
-import { Doctor } from '../../types';
 import { formatDate } from '../../lib/utils';
-import { ArrowLeft, Stethoscope, Building2, Phone, Mail, Users, Calendar } from 'lucide-react';
+import type { Doctor } from '../../types';
 
 interface DoctorProfileHeaderProps {
   doctor: Doctor;

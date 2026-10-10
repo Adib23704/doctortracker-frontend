@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import { ArrowRight, Lock, Mail, Sparkles, Stethoscope } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { Stethoscope, Lock, Mail, ArrowRight, Sparkles } from 'lucide-react';
-import { useAuth } from '../../contexts/AuthContext';
+import type React from 'react';
+import { useState } from 'react';
 import { toast } from 'sonner';
+import { useAuth } from '../../contexts/AuthContext';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -77,7 +78,8 @@ export default function LoginPage() {
               </button>
             </div>
             <p className="mt-1 text-[11px] text-teal-700">
-              Preset: <span className="font-mono">admin@doctortracker.com</span> / <span className="font-mono">Admin@123456</span>
+              Preset: <span className="font-mono">admin@doctortracker.com</span> /{' '}
+              <span className="font-mono">Admin@123456</span>
             </p>
           </div>
 

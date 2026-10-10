@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import { AlertTriangle, X } from 'lucide-react';
 
 interface ConfirmDialogProps {
@@ -73,12 +72,12 @@ export const ConfirmDialog = ({
             onClick={onConfirm}
             disabled={isLoading}
             className={`flex items-center gap-2 rounded-lg px-4 py-2 text-xs font-semibold text-white shadow-2xs transition disabled:opacity-50 ${
-              isDestructive
-                ? 'bg-rose-600 hover:bg-rose-700'
-                : 'bg-teal-600 hover:bg-teal-700'
+              isDestructive ? 'bg-rose-600 hover:bg-rose-700' : 'bg-teal-600 hover:bg-teal-700'
             }`}
           >
-            {isLoading && <div className="h-3 w-3 animate-spin rounded-full border-2 border-white border-t-transparent" />}
+            {isLoading && (
+              <div className="h-3 w-3 animate-spin rounded-full border-2 border-white border-t-transparent" />
+            )}
             <span>{confirmLabel}</span>
           </button>
         </div>
