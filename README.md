@@ -1,6 +1,10 @@
 # Doctor Tracker - Frontend Web Application
 
-Frontend client for Doctor Tracker, built with Next.js 15 (App Router), React 19, TypeScript, and Tailwind CSS. Designed as a clean administrative portal for clinic coordinators to manage doctors, track patients, and view real-time statistics.
+Frontend client for Doctor Tracker, built with Next.js 16 (App Router), React 19, TypeScript, and Tailwind CSS. Designed as a clean administrative portal for clinic coordinators to manage doctors, track patients, and view real-time statistics.
+
+- **Live Frontend Application:** https://doctortracker.adibdev.me/
+- **Backend GitHub Repo:** https://github.com/Adib23704/doctortracker-backend/
+- **Live Backend API:** https://doctortracker-api.adibdev.me/
 
 ---
 
@@ -146,10 +150,10 @@ Screenshots documenting the UI and responsive layout are located in `docs/screen
 
 ## Submission Details
 
-- **Frontend GitHub Repo:** `[Insert Frontend Repo URL]`
-- **Live Frontend URL:** `[Insert Live Vercel / Netlify URL]`
+- **Live Frontend URL:** `[Insert Live Frontend Website URL on Vercel / Netlify]`
 - **Backend GitHub Repo:** `[Insert Backend Repo URL]`
-- **Live Backend API URL:** `[Insert Live Backend URL]`
+- **Frontend GitHub Repo:** `[Insert Frontend Repo URL]`
+- **Live Backend API URL:** `[Insert Live Backend URL on Render / VPS / Railway]`
 - **Admin Login Credentials:**
   - **Email:** `admin@doctortracker.com`
   - **Password:** `Admin@123456`
