@@ -12,7 +12,24 @@ interface ConditionDistributionChartProps {
   }>;
 }
 
-const PALETTE = ['#0d9488', '#0284c7', '#6366f1', '#10b981', '#f59e0b', '#f43f5e'];
+const PALETTE = [
+  '#0d9488',
+  '#0284c7',
+  '#6366f1',
+  '#10b981',
+  '#f59e0b',
+  '#f43f5e',
+  '#8b5cf6',
+  '#ec4899',
+  '#64748b',
+];
+
+const getColor = (condition: string, index: number) => {
+  if (condition.toLowerCase().startsWith('other')) {
+    return '#64748b';
+  }
+  return PALETTE[index % (PALETTE.length - 1)];
+};
 
 export const ConditionDistributionChart = ({ data }: ConditionDistributionChartProps) => {
   const [mounted, setMounted] = useState(false);
@@ -75,8 +92,8 @@ export const ConditionDistributionChart = ({ data }: ConditionDistributionChartP
                   outerRadius={68}
                   paddingAngle={3}
                 >
-                  {data.map((_, index) => (
-                    <Cell key={`cell-${index}`} fill={PALETTE[index % PALETTE.length]} />
+                  {data.map((item, index) => (
+                    <Cell key={`cell-${item.condition}`} fill={getColor(item.condition, index)} />
                   ))}
                 </Pie>
               </PieChart>
@@ -90,7 +107,7 @@ export const ConditionDistributionChart = ({ data }: ConditionDistributionChartP
             </div>
           </div>
 
-          <div className="mt-4 divide-y divide-slate-100 border-t border-slate-100 pt-2">
+          <div className="mt-4 max-h-56 overflow-y-auto divide-y divide-slate-100 border-t border-slate-100 pt-2 pr-1">
             {data.map((item, index) => (
               <div
                 key={item.condition}
@@ -99,7 +116,7 @@ export const ConditionDistributionChart = ({ data }: ConditionDistributionChartP
                 <div className="flex items-center gap-2 min-w-0 pr-2">
                   <span
                     className="h-2.5 w-2.5 shrink-0 rounded-full"
-                    style={{ backgroundColor: PALETTE[index % PALETTE.length] }}
+                    style={{ backgroundColor: getColor(item.condition, index) }}
                   />
                   <span className="font-medium text-slate-700 truncate" title={item.condition}>
                     {item.condition}

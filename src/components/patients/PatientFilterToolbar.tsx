@@ -9,6 +9,7 @@ interface PatientFilterToolbarProps {
   onSearchChange: (val: string) => void;
   condition: string;
   onConditionChange: (val: string) => void;
+  conditions?: string[];
   status: string;
   onStatusChange: (val: string) => void;
   doctorId: string;
@@ -22,19 +23,6 @@ interface PatientFilterToolbarProps {
   hasActiveFilters: boolean;
 }
 
-const COMMON_CONDITIONS = [
-  'All',
-  'Hypertension',
-  'Coronary Artery Disease',
-  'Chronic Migraine',
-  'Pediatric Asthma',
-  'Osteoarthritis',
-  'Femur Fracture',
-  'Colorectal Carcinoma',
-  'Plaque Psoriasis',
-  'Atopic Dermatitis',
-];
-
 const STATUS_OPTIONS = ['All', 'Active', 'Under Observation', 'Critical', 'Discharged'];
 
 export const PatientFilterToolbar = ({
@@ -42,6 +30,7 @@ export const PatientFilterToolbar = ({
   onSearchChange,
   condition,
   onConditionChange,
+  conditions = [],
   status,
   onStatusChange,
   doctorId,
@@ -54,6 +43,10 @@ export const PatientFilterToolbar = ({
   onReset,
   hasActiveFilters,
 }: PatientFilterToolbarProps) => {
+  const dynamicConditionOptions = Array.from(
+    new Set(['All', ...conditions, ...(condition && condition !== 'All' ? [condition] : [])])
+  );
+
   return (
     <div className="space-y-3">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -75,11 +68,11 @@ export const PatientFilterToolbar = ({
           <select
             value={condition}
             onChange={(e) => onConditionChange(e.target.value)}
-            className="rounded-lg border border-slate-200 bg-slate-50 px-2 py-1 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-teal-500"
+            className="rounded-lg border border-slate-200 bg-slate-50 px-2 py-1 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-teal-500 max-w-[170px] truncate"
           >
-            {COMMON_CONDITIONS.map((c) => (
+            {dynamicConditionOptions.map((c) => (
               <option key={c} value={c}>
-                {c}
+                {c === 'All' ? 'All Conditions' : c}
               </option>
             ))}
           </select>

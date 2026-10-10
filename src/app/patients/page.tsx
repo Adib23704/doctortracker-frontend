@@ -14,6 +14,7 @@ import type { Doctor, PaginationInfo, Patient } from '../../types';
 export default function PatientsPage() {
   const [patients, setPatients] = useState<Patient[]>([]);
   const [doctors, setDoctors] = useState<Doctor[]>([]);
+  const [conditions, setConditions] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const [pagination, setPagination] = useState<PaginationInfo>({
@@ -36,12 +37,22 @@ export default function PatientsPage() {
   const [patientToDelete, setPatientToDelete] = useState<Patient | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
 
+  const fetchConditions = useCallback(async () => {
+    try {
+      const res = await api.getConditions();
+      setConditions(res.data);
+    } catch {
+      // ignore
+    }
+  }, []);
+
   useEffect(() => {
     api
       .getDoctors({ limit: 100 })
       .then((res) => setDoctors(res.data))
       .catch(() => {});
-  }, []);
+    fetchConditions();
+  }, [fetchConditions]);
 
   const fetchPatients = useCallback(async () => {
     setIsLoading(true);
@@ -90,6 +101,7 @@ export default function PatientsPage() {
       toast.success(`Patient ${patientToDelete.name} deleted successfully.`);
       setPatientToDelete(null);
       fetchPatients();
+      fetchConditions();
     } catch (err: any) {
       toast.error(err.message || 'Failed to delete patient record.');
     } finally {
@@ -122,6 +134,7 @@ export default function PatientsPage() {
             setCondition(val);
             setPagination((prev) => ({ ...prev, page: 1 }));
           }}
+          conditions={conditions}
           status={status}
           onStatusChange={(val) => {
             setStatus(val);
@@ -166,7 +179,10 @@ export default function PatientsPage() {
         patient={patientToEdit}
         isOpen={!!patientToEdit}
         onClose={() => setPatientToEdit(null)}
-        onSuccess={fetchPatients}
+        onSuccess={() => {
+          fetchPatients();
+          fetchConditions();
+        }}
       />
 
       <ConfirmDialog

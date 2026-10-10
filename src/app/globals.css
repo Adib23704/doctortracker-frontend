@@ -13,7 +13,6 @@
   }
 }
 
-/* Custom scrollbars for data tables and panels */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;

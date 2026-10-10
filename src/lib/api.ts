@@ -135,6 +135,10 @@ class ApiClient {
     return this.request<Patient[]>(`/patients${queryString}`);
   }
 
+  async getConditions() {
+    return this.request<string[]>('/patients/conditions');
+  }
+
   async getPatient(id: string) {
     return this.request<Patient>(`/patients/${id}`);
   }
